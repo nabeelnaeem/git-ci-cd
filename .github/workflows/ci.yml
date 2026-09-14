@@ -34,3 +34,11 @@ jobs:
 
       - name: Build
         run: npm run build
+
+  ci-ok:
+    runs-on: ubuntu-latest
+    needs: check
+    if: always()
+    steps:
+      - name: All checks passed
+        run: test "${{ needs.check.result }}" = "success"
